@@ -8,4 +8,4 @@ wordpress:
 db:
   image: mariadb
   environment:
-    MYSQL_ROOT_PASSWORD: swialyitt6
+    MYSQL_ROOT_PASSWORD: demodbAzpay
