@@ -7,5 +7,10 @@ wordpress:
 
 db:
   image: mariadb
+  volumes:
+      - ./maribaDB:/var/lib/mysql
   environment:
-    MYSQL_ROOT_PASSWORD: demodbAzpay
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=azpay
+      - MYSQL_PASSWORD=azpay123
+      - MYSQL_DATABASE=db
