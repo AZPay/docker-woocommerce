@@ -3,7 +3,7 @@ wordpress:
   links:
     - db
   ports:
-    - 8189:80
+    - 8080:80
   environment:
       - WORDPRESS_DEBUG=true
       - WORDPRESS_DB_HOST=db
