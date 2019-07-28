@@ -1,18 +1,13 @@
-Docker WooCommerce
+Docker WooCommerce AZPAY
 ===
 
-Woo commerce is a free eCommerce toolkit for WordPress.
+Woocommerce 
 
 Quick Start
 ---
 
 `docker-compose up`
 
-Point your browser to `http://127.0.0.1:8080`
+Point your browser to `http:/localhost:8080`
 
-License
----
 
-MIT
-
-**Free Software, Hell Yeah!**
