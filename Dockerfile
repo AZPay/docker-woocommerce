@@ -1,12 +1,12 @@
 FROM l2go/woocommerce:latest
 MAINTAINER Bruno Paz "brunopaz@azpay.com.br"
-
 ENV WOOCOMMERCE_VERSION 3.6.4
-ENV WOOCOMMERCE_UPSTREAM_VERSION 3.6.4
+
 RUN apt-get update && apt-get install -y apt-transport-https
-RUN apt-get install -y  unzip wget
+RUN apt-get install -y  unzip wget mariadb-server supervisor
 
 RUN rm -rf /usr/src/wordpress/wp-content/plugins/woocommerce
+
 
 RUN wget https://downloads.wordpress.org/plugin/woocommerce.${WOOCOMMERCE_VERSION}.zip -O /tmp/temp.zip \
     && cd /usr/src/wordpress/wp-content/plugins \
@@ -23,3 +23,12 @@ RUN wget https://github.com/azpay/Woocommerce3-plugin/archive/master.zip -O /tmp
     && rm /tmp/temp2.zip \
     && cd Woocommerce3-plugin-master \
     && mv azpay-woocommerce ../
+
+COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+
+COPY entrypoint.sh /usr/local/bin/
+
+RUN cp -rp /var/lib/mysql /var/lib/mysql-no-volume
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["supervisord"]
