@@ -1,6 +1,7 @@
 version: '3'
 services:
   wordpress:
+    image: l2go/woocommerce:latest
     build: .
     ports:
       - 8189:80
