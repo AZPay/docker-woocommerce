@@ -5,17 +5,14 @@ ENV WOOCOMMERCE_VERSION 3.6.4
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN apt-get install -y  unzip wget mariadb-server supervisor
 
-RUN rm -rf /usr/src/wordpress/wp-content/plugins/woocommerce
-
+RUN rm -rf /usr/src/wordpress/wp-content/plugins/woocommerce \
+	&& rm -rf /usr/src/wordpress/wp-content/plugins/azpay-woocommerce \
+	&& rm -rf /usr/src/wordpress/wp-content/plugins/Woocommerce3-plugin-master
 
 RUN wget https://downloads.wordpress.org/plugin/woocommerce.${WOOCOMMERCE_VERSION}.zip -O /tmp/temp.zip \
     && cd /usr/src/wordpress/wp-content/plugins \
     && unzip /tmp/temp.zip \
     && rm /tmp/temp.zip
-
-RUN rm -rf /usr/src/wordpress/wp-content/plugins/azpay-woocommerce \
-	&& rm -rf /usr/src/wordpress/wp-content/plugins/Woocommerce3-plugin-master
-
 
 RUN wget https://github.com/azpay/Woocommerce3-plugin/archive/master.zip -O /tmp/temp2.zip \
     && cd /usr/src/wordpress/wp-content/plugins \
@@ -28,7 +25,7 @@ COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
 
 COPY entrypoint.sh /usr/local/bin/
 
+RUN chmod 755 /usr/local/bin/entrypoint.sh
 RUN cp -rp /var/lib/mysql /var/lib/mysql-no-volume
 
-ENTRYPOINT ["entrypoint.sh"]
 CMD ["supervisord"]

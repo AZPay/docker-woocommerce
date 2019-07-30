@@ -1,5 +1,5 @@
 wordpress:
-  build: .
+  image: l2go/woocommerce:latest
   ports:
     - 8189:80
   environment:
