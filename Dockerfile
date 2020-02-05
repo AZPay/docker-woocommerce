@@ -13,13 +13,15 @@ RUN wget https://downloads.wordpress.org/plugin/woocommerce.${WOOCOMMERCE_VERSIO
     && cd /usr/src/wordpress/wp-content/plugins \
     && unzip /tmp/temp.zip \
     && rm /tmp/temp.zip
-
+    
 RUN wget https://github.com/azpay/Woocommerce3-plugin/archive/master.zip -O /tmp/temp2.zip \
     && cd /usr/src/wordpress/wp-content/plugins \
     && unzip /tmp/temp2.zip \
     && rm /tmp/temp2.zip \
     && cd Woocommerce3-plugin-master \
-    && mv azpay-woocommerce ../
+    && mv azpay-woocommerce ../ \
+    && chmod -R 775 /usr/src/wordpress/wp-content/plugins/azpay-woocommerce \
+    && chown -R www-data:www-data /usr/src/wordpress/wp-content/plugins
 
 COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
 
